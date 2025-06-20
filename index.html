@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <button id="vanilla" onclick="VanillaTitle()">Vanilla Button</button>
+    <h3>Count:<span id="vanillaCount">0</span></h3><br><br>
+
+    <div id="react"></div>
+
+
+</body>
+
+</html>
+<script type="text/babel" data-type="module">
+
+    let count1 = 0;
+    let count2 = 0;
+    document.querySelector('#vanilla').addEventListener('click', () => {
+        let title1 = document.querySelector('title');
+        let countV = document.querySelector('#vanillaCount');
+        ++count1;
+        title1.innerText = "Vanilla DOM";
+        countV.innerText = count1;
+    })
+
+
+    //  react button
+    const { useState } = React;
+    function Counter() {
+        const [count, setCount] = useState(0);
+        function handleCount() {
+            setCount(count + 1)
+        }
+        return (
+            <div>
+                <h2>Count: {count}</h2>
+                <button onClick={handleCount}> React Button </button>
+            </div>
+        )
+    }
+
+    function App() {
+        return <Counter />
+    }
+
+
+    let root = ReactDOM.createRoot(document.getElementById('react'));
+    root.render(<App />)
+
+
+</script>
